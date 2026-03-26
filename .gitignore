@@ -55,3 +55,7 @@ handout/*.out
 # 自动生成的文件
 tags
 cscope.out
+
+# 排除 Windows NTFS 备用数据流文件
+:Zone.Identifier
+*:Zone.Identifier
