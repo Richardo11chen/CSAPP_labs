@@ -1,0 +1,57 @@
+# 编译产物
+*.o
+*.obj
+*.out
+*.exe
+*.so
+*.dylib
+*.a
+*.lib
+
+# 可执行文件
+bomb
+ish
+tsh
+csim
+test-trans
+driver
+fcyc
+clock
+myspin
+mysplit
+mystop
+myint
+sdriver
+tiny
+proxy
+nop-server.py
+
+# 临时文件
+*.swp
+*.swo
+*~
+.DS_Store
+*.pyc
+__pycache__/
+
+# IDE 文件
+.vscode/
+.idea/
+*.code-workspace
+
+# 实验框架文件
+# 注意：不要忽略 handout 目录，但可以忽略其编译产物
+handout/*.o
+handout/*.exe
+handout/*.out
+
+# 日志和测试输出
+*.log
+*.output
+*.txt
+*.tar
+*.tgz
+
+# 自动生成的文件
+tags
+cscope.out
