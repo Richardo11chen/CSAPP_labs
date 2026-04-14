@@ -245,7 +245,12 @@ int isLessOrEqual(int x, int y) {
  *   Rating: 4 
  */
 int logicalNeg(int x) {
-  return 2;
+  int t1=x|x>>16;
+  int t2=t1|t1>>8;
+  int t3=t2|t2>>4;
+  int t4=t3|t3>>2;
+  int t5=t4|t4>>1;
+  return (t5&1)^1;
 }
 /* howManyBits - return the minimum number of bits required to represent x in
  *             two's complement
@@ -260,7 +265,24 @@ int logicalNeg(int x) {
  *  Rating: 4
  */
 int howManyBits(int x) {
-  return 0;
+  int sign = x >> 31;
+  int b16, b8, b4, b2, b1, b0;
+  
+  x = (sign & ~x) | (~sign & x);
+  
+  b16 = !!(x >> 16) << 4;
+  x = x >> b16;
+  b8 = !!(x >> 8) << 3;
+  x = x >> b8;
+  b4 = !!(x >> 4) << 2;
+  x = x >> b4;
+  b2 = !!(x >> 2) << 1;
+  x = x >> b2;
+  b1 = !!(x >> 1);
+  x = x >> b1;
+  b0 = x;
+  
+  return b16 + b8 + b4 + b2 + b1 + b0 + 1;
 }
 //float
 /* 
@@ -275,7 +297,20 @@ int howManyBits(int x) {
  *   Rating: 4
  */
 unsigned floatScale2(unsigned uf) {
-  return 2;
+  int sign=uf>>31;
+  int exp=(uf>>23)&0xff;
+  int frac=uf&0x7fffff;
+  if(exp==255) return uf;
+  if(exp==0){
+    int ef=exp<<23|frac;
+    ef=ef<<1;
+    return sign<<31|ef;
+  }
+  exp+=1;
+  if(exp==255){
+    frac=0;
+  }
+  return (sign<<31)|(exp<<23)|frac;
 }
 /* 
  * floatFloat2Int - Return bit-level equivalent of expression (int) f
@@ -290,7 +325,26 @@ unsigned floatScale2(unsigned uf) {
  *   Rating: 4
  */
 int floatFloat2Int(unsigned uf) {
-  return 2;
+  int sign=uf>>31;
+  int exp=(uf>>23)&0xff;
+  int frac=uf&0x7fffff;
+  int E=0,t=0;
+  if(exp==255){
+    return 0x80000000u;
+  } else if(exp==0){
+    E=-126;
+  } else{
+    E=exp-127;
+  }
+  if(E<0) return 0;
+  if(E>=31) return 0x80000000u;
+  t=1<<23|frac;
+  if(E>23){
+    t=t<<(E-23);
+  } else{
+    t=t>>(23-E);
+  }
+  return sign ? -t : t;
 }
 /* 
  * floatPower2 - Return bit-level equivalent of the expression 2.0^x
@@ -306,5 +360,16 @@ int floatFloat2Int(unsigned uf) {
  *   Rating: 4
  */
 unsigned floatPower2(int x) {
-    return 2;
+  int exp=0,shift=0;
+    if(x<-149){
+      return 0;
+    } else if(x>127){
+      return 0x7F800000;
+    } else if(x>=-126){
+      exp=x+127;
+      return exp<<23;
+    } else{
+      shift=-126-x;
+      return 1<<23>>shift;
+    }
 }

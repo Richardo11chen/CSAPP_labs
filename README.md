@@ -3,7 +3,7 @@
 > A personal repository documenting my journey through the legendary *Computer Systems: A Programmer's Perspective (3rd Edition)* labs. This includes all lab solutions, detailed write-ups, and key learnings.
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-![Progress](https://img.shields.io/badge/Progress-0%20%2F%208%20Labs-orange)
+![Progress](https://img.shields.io/badge/Progress-1%20%2F%208%20Labs-orange)
 
 ## 📂 项目结构
 
@@ -23,7 +23,7 @@ CSAPP-Labs/
 
 | 实验 | 名称 | 状态 | 完成日期 | 关键收获/难点 | 实验日记 |
 | :---: | :--- | :---: | :---: | :--- | :---: |
-| 1 | src/datalab | 🚧 | - | 位运算的奇妙技巧，理解整数/浮点表示 好难😭| [实验笔记](docs/datalab-note.md) |
+| 1 | src/datalab | ✅ | 2026/4/14 | 位运算的奇妙技巧，理解整数/浮点表示 好难😭| [实验笔记](docs/datalab-note.md) |
 | 2 | src/bomblab | ⏳ | - | 汇编代码分析、GDB 实战 | - |
 | 3 | src/attacklab | ⏳ | - | 缓冲区溢出攻击原理（代码注入与ROP） | - |
 | 4 | src/archlab | ⏳ | - | Y86-64 指令集、流水线 CPU 设计 | - |
